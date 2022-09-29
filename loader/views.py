@@ -33,7 +33,6 @@ def get_free_filename(folder, file_type):
             raise OutOfFreeNamesError("No free names to save Image")
 
 
-
 @loader_blueprint.route('/post', methods=['GET'])
 def page_from():
     return render_template('post_form.html')
@@ -57,7 +56,7 @@ def page_greate_posts():
     picture.save(os.path.join(folder, filename_to_save))
 
     # формируем путь для браузера клиент
-    web_path = f"/uploads/images{filename_to_save}"
+    web_path = f"/uploads/images/{filename_to_save}"
 
     # Сохраняем данные
     post = {"pic": web_path, "content": content}
@@ -68,6 +67,7 @@ def page_greate_posts():
 
     return render_template("post_uploaded.html", pic=web_path, content=content)
 
+
 @loader_blueprint.errorhandler(OutOfFreeNamesError)
 def error_out_of_free_names(e):
-    return "Закончились свободные имена для загрузки картринок"
+    return "Закончились свободные имена для загрузки картинок"
